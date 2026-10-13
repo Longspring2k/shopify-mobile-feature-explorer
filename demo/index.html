@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mobile Feature Explorer</title>
+  <link rel="stylesheet" href="/demo/styles.css">
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Original interaction study</p>
+    <h1>Explore what changes the daily carry.</h1>
+    <p class="lede">Use the tabs, arrow keys, controls, or a horizontal drag on a narrow viewport.</p>
+
+    <section class="explorer" data-feature-explorer data-palette="citrus" aria-label="Product feature explorer">
+      <div class="palette" aria-label="Illustration palette">
+        <span>Palette</span>
+        <button type="button" data-palette="citrus" aria-pressed="true">Citrus</button>
+        <button type="button" data-palette="tide" aria-pressed="false">Tide</button>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Product features">
+        <button id="tab-balance" role="tab" aria-controls="panel-balance" aria-selected="true" tabindex="0">Balanced</button>
+        <button id="tab-pack" role="tab" aria-controls="panel-pack" aria-selected="false" tabindex="-1">Packable</button>
+        <button id="tab-ready" role="tab" aria-controls="panel-ready" aria-selected="false" tabindex="-1">Ready</button>
+      </div>
+
+      <div class="viewport" data-gesture-viewport>
+        <div class="track" data-panel-track>
+          <article id="panel-balance" role="tabpanel" aria-labelledby="tab-balance" tabindex="0">
+            <div class="art art-balance" aria-hidden="true"><i></i><b></b><em></em></div>
+            <div><p class="number">01</p><h2>Balanced by design</h2><p>A low center and broad base turn a simple silhouette into a stable everyday object.</p></div>
+          </article>
+          <article id="panel-pack" role="tabpanel" aria-labelledby="tab-pack" tabindex="0" hidden>
+            <div class="art art-pack" aria-hidden="true"><i></i><b></b><em></em></div>
+            <div><p class="number">02</p><h2>Compact when packed</h2><p>Nested forms communicate a smaller stored footprint without imitating a commercial product.</p></div>
+          </article>
+          <article id="panel-ready" role="tabpanel" aria-labelledby="tab-ready" tabindex="0" hidden>
+            <div class="art art-ready" aria-hidden="true"><i></i><b></b><em></em></div>
+            <div><p class="number">03</p><h2>Ready in one motion</h2><p>A single visible action point keeps the illustration and interaction story deliberately focused.</p></div>
+          </article>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button type="button" data-previous aria-label="Previous feature">←</button>
+        <p aria-live="polite" aria-atomic="true" data-status>Balanced selected</p>
+        <button type="button" data-next aria-label="Next feature">→</button>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="/demo/app.mjs"></script>
+</body>
+</html>

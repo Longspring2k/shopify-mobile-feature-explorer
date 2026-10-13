@@ -1,47 +1,57 @@
 # Mobile Product Feature Explorer
 
-An interactive feature-navigation component with phone-specific gestures, desktop navigation, option switching and accessible tab behavior.
+An original, dependency-free interaction study for a product-feature section. The repository contains runnable source, a local browser demo, deterministic state-machine tests, and an explicit evidence boundary.
 
-**Technical showcase · Documentation only · Anonymized**
+**Technical showcase · Anonymized · Local demonstration**
 
-Shopify | Liquid | JavaScript | CSS | Pointer Events | Playwright
+JavaScript | CSS | Pointer Events | WAI-ARIA tabs | Node.js
 
-## Engineering problem
+## Run it
 
-Touch, keyboard and button input should lead to the same coherent active-panel state. Phone-specific behavior must not leak into tablet and desktop layouts.
+Requires a current Node.js release (verified with Node 26).
 
-## Implementation scope
-
-- Built generated feature navigation with tab semantics and Arrow, Home and End keyboard support.
-- Implemented option switching and corresponding product-image changes.
-- Added phone-specific pointer-drag behavior and previous/next controls.
-- Kept mobile interaction logic distinct from larger-screen behavior.
-- Prepared an anonymized presentation with checks for initialization, active panels, local image references and horizontal overflow.
-
-## Architecture at a glance
-
-The following is an illustrative technical flow, not a client screenshot or a deployment topology.
-
-```mermaid
-flowchart TD
-    N0["Pointer or keyboard input"]
-    N1["Active feature state"]
-    N0 --> N1
-    N2["Navigation and panel update"]
-    N1 --> N2
-    N3["Option and image selection"]
-    N2 --> N3
+```sh
+node --test
+node demo/run.mjs
+node demo/server.mjs
 ```
 
-## Evidence and delivery boundary
+Open `http://127.0.0.1:4177/`. Set `PORT` to an integer from 1 through 65535 to override the port.
 
-Implemented component and anonymized local presentation; production deployment is not asserted.
+## What the demo proves
 
-The local presentation includes Playwright coverage for narrow and wide layouts, active-panel behavior and overflow. Its tests and appearance are not evidence of a production theme launch or physical-device touch certification.
+- One selected-feature state is shared by tabs, previous/next buttons, keyboard commands, and pointer drag.
+- The pure state machine owns pointer identity and models `idle`, `pending`, `horizontal-drag`, `cancel`, and `commit` outcomes.
+- Mobile drag uses axis locking. Vertical intent remains native scrolling; horizontal intent calls `preventDefault()` only after lock.
+- Drag translation is reversible and visual only. Selection changes once from the final release coordinate at or beyond a width-relative threshold.
+- Navigation wraps at both ends.
+- Tabs use a real tablist/tabpanel relationship, roving `tabindex`, and Arrow/Home/End keys.
+- Keyboard selection moves focus once; pointer, button, palette, and later hover/move renders do not steal it back.
+- The gesture is disabled above the mobile breakpoint, and crossing that breakpoint cancels an active drag.
+- Reduced-motion preference removes track transition without changing state behavior.
+- The illustration and copy are newly made CSS/HTML material; no external assets or private implementation are included.
 
-## Read more
+## Structure
+
+```text
+src/state-machine.mjs   Pure validated state transitions
+src/browser-adapter.mjs DOM events, ARIA rendering, lifecycle cleanup
+test/                   Deterministic unit coverage
+demo/                   Local page, CSS, server, and CLI trace
+docs/                   Engineering, state, verification, and scope notes
+```
+
+## Shopify adaptation boundary
+
+A theme adapter could read block data, render equivalent tabs/panels in Liquid, and mount the browser adapter on each section instance. That adapter is intentionally **not implemented** here: there is no Shopify API call, theme schema, product data, cart behavior, or claim of store deployment.
+
+## Documentation
 
 - [Engineering decisions](docs/engineering.md)
+- [State machine and coordinate model](docs/state-machine.md)
+- [Verification matrix](docs/verification.md)
 - [Scope and evidence boundaries](docs/scope.md)
 
-> This repository describes verified implementation work at a technical level. Original source, identities, business data and visual assets are intentionally omitted. It is not an installable application or a claim that the original private implementation is open source.
+## Evidence boundary
+
+The included tests and local browser page establish behavior in this repository. They are not physical-device testing, assistive-technology certification, production deployment evidence, or a copy of a private storefront.

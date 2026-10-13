@@ -1,0 +1,10 @@
+{
+  "name": "shopify-mobile-feature-explorer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "trace": "node demo/run.mjs",
+    "serve": "node demo/server.mjs"
+  }
+}

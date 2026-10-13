@@ -1,22 +1,24 @@
 # Scope and evidence boundaries
 
-## Documented state
+## Included
 
-Implemented component and anonymized local presentation; production deployment is not asserted.
+- Newly written pure selection and pointer-gesture state machine.
+- Newly written DOM adapter using Pointer Events and ARIA tabs.
+- Newly written responsive HTML/CSS illustration and two palette options.
+- Dependency-free Node test suite, CLI trace, and loopback static server.
+- Engineering, state-model, verification, and integration-boundary documentation.
 
-## Evidence basis
+## Not included or claimed
 
-The local presentation includes Playwright coverage for narrow and wide layouts, active-panel behavior and overflow. Its tests and appearance are not evidence of a production theme launch or physical-device touch certification.
+- No client source, assets, identity, product copy, data, screenshots, or exact visual recreation.
+- No Shopify theme, Liquid schema, Storefront/Admin API, cart integration, app proxy, or deployment workflow.
+- No external runtime assets or packages.
+- No production launch, conversion result, customer endorsement, physical-device certification, or assistive-technology certification.
 
-The public narrative was prepared against retained implementation and verification artifacts. Those private references are not redistributed. Source inspection, recorded test results, staging observations and production deployment are different levels of evidence; none is silently substituted for another.
+## Evidence levels
 
-## Not claimed or distributed
+The repository can directly evidence source behavior through its tests, CLI trace, and local HTTP/browser operation. It cannot evidence a private implementation, a live store, or operational outcomes. The Shopify section notes describe a possible adapter boundary, not completed integration.
 
-- Only technical documentation is published here, not the original section or presentation assets.
-- No original product identity, imagery or customer-facing copy is reused.
+## License boundary
 
-## Public repository boundary
-
-Only newly written technical documentation and illustrative diagrams are included. There are no original application source files, datasets, screenshots, deployment scripts, credentials or inherited Git history. No business-performance figures or customer endorsements are asserted.
-
-The repository is intended for technical review of the engineering approach. It makes no grant of rights to the original private implementation or third-party dependencies.
+No license grant is added. The demonstration consists only of original showcase material, and it does not redistribute private or third-party work.
